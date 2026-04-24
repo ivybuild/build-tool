@@ -51,7 +51,7 @@
 
   /* 卡片基础样式 */
   .card-base {
-    @apply bg-white rounded-xl border border-border-DEFAULT shadow-card;
+    @apply bg-white rounded-xl border border-default shadow-card;
   }
 
   /* 填空块 */

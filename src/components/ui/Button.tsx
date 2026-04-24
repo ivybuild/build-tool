@@ -21,10 +21,10 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           'disabled:opacity-50 disabled:cursor-not-allowed',
           {
             'bg-primary text-white hover:bg-primary-hover active:scale-95': variant === 'primary',
-            'bg-surface-muted text-ink hover:bg-border-DEFAULT active:scale-95': variant === 'secondary',
+            'bg-surface-muted text-ink hover:bg-gray-200 active:scale-95': variant === 'secondary',
             'text-ink hover:bg-surface-muted active:scale-95': variant === 'ghost',
             'bg-red-50 text-red-600 hover:bg-red-100 active:scale-95': variant === 'danger',
-            'border border-border-DEFAULT text-ink hover:bg-surface-muted active:scale-95': variant === 'outline',
+            'border border-default text-ink hover:bg-surface-muted active:scale-95': variant === 'outline',
           },
           {
             'text-xs px-2.5 py-1': size === 'sm',

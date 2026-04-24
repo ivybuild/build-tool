@@ -49,7 +49,7 @@ export default function Navbar() {
   return (
     <>
       {/* 顶部导航（桌面） */}
-      <header className="hidden sm:flex sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-border-DEFAULT">
+      <header className="hidden sm:flex sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-default">
         <nav className="max-w-2xl mx-auto w-full px-4 h-12 flex items-center justify-between">
           <div className="flex items-center gap-1">
             {NAV_ITEMS.map(item => (
@@ -78,7 +78,7 @@ export default function Navbar() {
       </header>
 
       {/* 底部导航（移动端） */}
-      <nav className="sm:hidden fixed bottom-0 inset-x-0 z-40 bg-white/90 backdrop-blur-md border-t border-border-DEFAULT safe-area-inset-bottom">
+      <nav className="sm:hidden fixed bottom-0 inset-x-0 z-40 bg-white/90 backdrop-blur-md border-t border-default safe-area-inset-bottom">
         <div className="flex">
           {NAV_ITEMS.map(item => (
             <Link

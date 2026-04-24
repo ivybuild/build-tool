@@ -184,7 +184,7 @@ export default function NotesClient({ initialNotes, userId }: NotesClientProps) 
           {uploadedImages.length > 0 && (
             <div className="flex gap-2 flex-wrap mb-3">
               {uploadedImages.map((url, i) => (
-                <div key={i} className="relative group w-16 h-16 rounded-lg overflow-hidden border border-border-DEFAULT">
+                <div key={i} className="relative group w-16 h-16 rounded-lg overflow-hidden border border-default">
                   <Image src={url} alt="" fill className="object-cover" />
                   <button
                     onClick={() => setUploadedImages(prev => prev.filter((_, idx) => idx !== i))}
@@ -283,7 +283,7 @@ function NoteCard({
         <div className="flex gap-2 flex-wrap mt-3">
           {note.images.map((url, i) => (
             <a key={i} href={url} target="_blank" rel="noopener noreferrer"
-               className="block w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border border-border-DEFAULT hover:opacity-90 transition-opacity relative">
+               className="block w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border border-default hover:opacity-90 transition-opacity relative">
               <Image src={url} alt="" fill className="object-cover" />
             </a>
           ))}
@@ -291,7 +291,7 @@ function NoteCard({
       )}
 
       {/* 底部元信息 */}
-      <div className="flex items-center justify-between mt-3 pt-3 border-t border-border-light">
+      <div className="flex items-center justify-between mt-3 pt-3 border-t border-light">
         <div className="flex items-center gap-3 text-xs text-ink-muted">
           <span title="创建时间">创建 {formatDateTime(note.created_at)}</span>
           {note.updated_at !== note.created_at && (

@@ -188,7 +188,7 @@ export default function NewCardClient({ userId, initialTitle = '', initialSegmen
             </div>
           </div>
           <textarea
-            className="w-full px-3 py-2 text-base text-ink bg-white border border-border-DEFAULT rounded-lg placeholder:text-ink-muted focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-150 resize-none"
+            className="w-full px-3 py-2 text-base text-ink bg-white border border-default rounded-lg placeholder:text-ink-muted focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-150 resize-none"
             placeholder={"输入卡片内容，用 {{填空内容}} 标记需要填空的部分\n\n示例：\n光合作用的产物是 {{葡萄糖}} 和 {{氧气}}。"}
             rows={8}
             value={rawText}

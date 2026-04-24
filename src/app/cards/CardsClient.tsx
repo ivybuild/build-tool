@@ -163,7 +163,7 @@ function StudyCard({
       'rounded-xl border transition-shadow',
       isReview
         ? 'bg-review-bg border-review-border shadow-sm'
-        : 'bg-white border-border-DEFAULT shadow-card hover:shadow-card-hover'
+        : 'bg-white border-default shadow-card hover:shadow-card-hover'
     )}>
       {/* 卡片头部（点击展开） */}
       <button
@@ -197,7 +197,7 @@ function StudyCard({
 
       {/* 展开内容 */}
       {expanded && (
-        <div className="animate-fade-in border-t border-border-DEFAULT/60">
+        <div className="animate-fade-in border-t border-default/60">
           {/* 卡片内容 */}
           <div className="px-4 py-3">
             <CardContent content={card.content} />
