@@ -20,7 +20,7 @@ export function Tag({ label, active, onClick, onRemove, className }: TagProps) {
         onClick ? 'cursor-pointer' : '',
         active
           ? 'bg-primary text-white'
-          : 'bg-surface-muted text-ink-secondary hover:bg-border-DEFAULT',
+          : 'bg-surface-muted text-ink-secondary hover:bg-gray-200',
         className
       )}
     >

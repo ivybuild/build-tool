@@ -57,10 +57,10 @@
   /* 填空块 */
   .blank-block {
     @apply inline-block px-2 py-0.5 min-w-[4rem] rounded cursor-pointer
-           bg-ink-muted/10 border-b-2 border-ink-muted/40
+           bg-gray-200/30 border-b-2 border-gray-300
            text-transparent select-none transition-all duration-200;
   }
   .blank-block.revealed {
-    @apply bg-primary-light border-b-2 border-primary/40 text-primary;
+    @apply bg-blue-50 border-b-2 border-blue-300 text-blue-600;
   }
 }
