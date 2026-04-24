@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: 14px;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    color: #374151;
+    background-color: #FAFAFA;
+    font-family: "Source Han Sans SC", "思源黑体", "Microsoft YaHei", "微软雅黑", "DengXian", "等线", system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* 滚动条美化 */
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #D1D5DB;
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #9CA3AF;
+  }
+
+  /* 选中文字颜色 */
+  ::selection {
+    background: #DBEAFE;
+    color: #1E40AF;
+  }
+}
+
+@layer components {
+  /* 页面容器 */
+  .page-container {
+    @apply max-w-2xl mx-auto px-4 py-6;
+  }
+
+  /* 卡片基础样式 */
+  .card-base {
+    @apply bg-white rounded-xl border border-border-DEFAULT shadow-card;
+  }
+
+  /* 填空块 */
+  .blank-block {
+    @apply inline-block px-2 py-0.5 min-w-[4rem] rounded cursor-pointer
+           bg-ink-muted/10 border-b-2 border-ink-muted/40
+           text-transparent select-none transition-all duration-200;
+  }
+  .blank-block.revealed {
+    @apply bg-primary-light border-b-2 border-primary/40 text-primary;
+  }
+}
