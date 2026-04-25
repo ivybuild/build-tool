@@ -41,7 +41,7 @@ export default function CardsClient({ initialCards, userId }: CardsClientProps) 
         study_count: newCount,
         next_review_at: nextReview.toISOString(),
         last_studied_at: new Date().toISOString(),
-      })
+      } as any)
       .eq('id', card.id)
       .select()
       .single()
