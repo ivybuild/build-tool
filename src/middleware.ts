@@ -21,6 +21,8 @@ export async function middleware(request: NextRequest) {
           }[]
         ) {
           cookiesToSet.forEach(({ name, value, options }) => {
+            // 必须同时设置到 request 和 response，否则 getUser() 无法读取 session
+            request.cookies.set(name, value)
             response.cookies.set(name, value, options)
           })
         },
