@@ -2,57 +2,8 @@ import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
 export async function middleware(request: NextRequest) {
-  const response = NextResponse.next()
-
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() {
-          return request.cookies.getAll()
-        },
-
-        setAll(
-          cookiesToSet: {
-            name: string
-            value: string
-            options: any
-          }[]
-        ) {
-          cookiesToSet.forEach(({ name, value, options }) => {
-            // 必须同时设置到 request 和 response，否则 getUser() 无法读取 session
-            request.cookies.set(name, value)
-            response.cookies.set(name, value, options)
-          })
-        },
-      },
-    }
-  )
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
-  const pathname = request.nextUrl.pathname
-
-  const protectedPaths = ['/notes', '/cards']
-  const isProtected = protectedPaths.some((path) =>
-    pathname.startsWith(path)
-  )
-
-  if (!user && isProtected) {
-    return NextResponse.redirect(new URL('/login', request.url))
-  }
-
-  if (
-    user &&
-    (pathname === '/login' || pathname === '/register')
-  ) {
-    return NextResponse.redirect(new URL('/', request.url))
-  }
-
-  return response
+  // 暂时不做权限检查，让页面组件自行处理认证
+  return NextResponse.next()
 }
 
 export const config = {
