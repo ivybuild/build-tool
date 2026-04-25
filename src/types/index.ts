@@ -49,7 +49,7 @@ export interface Database {
       cards: {
         Row: Card
         Insert: Omit<Card, 'id' | 'created_at' | 'updated_at' | 'study_count' | 'is_archived'>
-        Update: Partial<Omit<Card, 'id' | 'user_id' | 'created_at'>>
+        Update: Partial<Omit<Card, 'id' | 'user_id' | 'created_at' | 'content'>> & { content?: unknown }
       }
       study_logs: {
         Row: StudyLog
