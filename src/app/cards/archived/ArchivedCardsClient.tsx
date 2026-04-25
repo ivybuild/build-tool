@@ -25,6 +25,7 @@ export default function ArchivedCardsClient({ initialCards }: ArchivedCardsClien
     setRestoring(card.id)
     const { error } = await supabase
       .from('cards')
+      // @ts-ignore - Supabase 类型推断问题
       .update({
         is_archived: false,
         next_review_at: calcNextReviewAt(card.study_count).toISOString()

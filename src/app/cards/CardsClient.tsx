@@ -35,9 +35,9 @@ export default function CardsClient({ initialCards, userId }: CardsClientProps) 
   async function handleStudied(card: Card) {
     const newCount = card.study_count + 1
     const nextReview = calcNextReviewAt(newCount)
-    // @ts-ignore - Supabase 类型推断问题
     const { data, error } = await supabase
       .from('cards')
+      // @ts-ignore - Supabase 类型推断问题
       .update({
         study_count: newCount,
         next_review_at: nextReview.toISOString(),
@@ -48,8 +48,10 @@ export default function CardsClient({ initialCards, userId }: CardsClientProps) 
       .single()
 
     if (!error && data) {
+      // @ts-ignore - Supabase 类型推断问题
       setCards(prev => prev.map(c => c.id === data.id ? data : c))
       // 写入学习日志
+      // @ts-ignore - Supabase 类型推断问题
       await supabase.from('study_logs').insert({
         card_id: card.id,
         user_id: userId,
@@ -60,9 +62,9 @@ export default function CardsClient({ initialCards, userId }: CardsClientProps) 
   async function handleArchive() {
     if (!archiveTarget) return
     setArchiving(true)
-    // @ts-ignore - Supabase 类型推断问题
     const { error } = await supabase
       .from('cards')
+      // @ts-ignore - Supabase 类型推断问题
       .update({ is_archived: true })
       .eq('id', archiveTarget.id)
     if (!error) {

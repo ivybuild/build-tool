@@ -2,22 +2,25 @@ import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import AppLayout from '@/components/layout/AppLayout'
 import ArchivedCardsClient from './ArchivedCardsClient'
+import { Card } from '@/types'
 
 export default async function ArchivedPage() {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/login')
 
-  const { data: cards } = await supabase
+  const { data: cardsData } = await supabase
     .from('cards')
     .select('*')
     .eq('user_id', user.id)
     .eq('is_archived', true)
     .order('updated_at', { ascending: false })
 
+  const cards = (cardsData ?? []) as Card[]
+
   return (
     <AppLayout>
-      <ArchivedCardsClient initialCards={cards ?? []} />
+      <ArchivedCardsClient initialCards={cards} />
     </AppLayout>
   )
 }

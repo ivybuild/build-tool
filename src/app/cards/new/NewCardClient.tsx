@@ -116,6 +116,7 @@ export default function NewCardClient({ userId, initialTitle = '', initialSegmen
     if (cardId) {
       const { error } = await supabase
         .from('cards')
+        // @ts-ignore - Supabase 类型推断问题
         .update({ title, content: { segments } })
         .eq('id', cardId)
       if (error) {
@@ -126,6 +127,7 @@ export default function NewCardClient({ userId, initialTitle = '', initialSegmen
     } else {
       const { error } = await supabase
         .from('cards')
+        // @ts-ignore - Supabase 类型推断问题
         .insert({
           user_id: userId,
           title,

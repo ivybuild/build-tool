@@ -32,7 +32,7 @@ export default function RegisterPage() {
     const { error } = await supabase.auth.signUp({
       email,
       password,
-      options: { emailRedirectTo: `${window.location.origin}/` },
+      options: { emailRedirectTo: typeof window !== 'undefined' ? `${window.location.origin}/` : '/' },
     })
     if (error) {
       setError(error.message === 'User already registered' ? '该邮箱已注册' : '注册失败，请重试')

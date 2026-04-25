@@ -88,20 +88,24 @@ export default function NotesClient({ initialNotes, userId }: NotesClientProps) 
     if (editingNote) {
       const { data, error } = await supabase
         .from('notes')
+        // @ts-ignore - Supabase 类型推断问题
         .update({ content, images: uploadedImages, tags })
         .eq('id', editingNote.id)
         .select()
         .single()
       if (!error && data) {
+        // @ts-ignore - Supabase 类型推断问题
         setNotes(prev => prev.map(n => n.id === data.id ? data : n))
       }
     } else {
       const { data, error } = await supabase
         .from('notes')
+        // @ts-ignore - Supabase 类型推断问题
         .insert({ user_id: userId, content, images: uploadedImages, tags })
         .select()
         .single()
       if (!error && data) {
+        // @ts-ignore - Supabase 类型推断问题
         setNotes(prev => [data, ...prev])
       }
     }
