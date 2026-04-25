@@ -1,27 +1,54 @@
-import { redirect } from 'next/navigation'
-import { createClient } from '@/lib/supabase/server'
+'use client'
+
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { createClient } from '@/lib/supabase/client'
 
-export default async function HomePage() {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
+export default function HomePage() {
+  const router = useRouter()
+  const supabase = createClient()
+  const [user, setUser] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
+  const [stats, setStats] = useState({ noteCount: 0, cardCount: 0, reviewCount: 0 })
 
-  if (!user) {
-    redirect('/login')
+  useEffect(() => {
+    async function checkAuth() {
+      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) {
+        router.push('/login')
+        return
+      }
+      setUser(user)
+
+      // 获取统计数据
+      const [{ count: noteCount }, { count: cardCount }, { data: reviewCards }] = await Promise.all([
+        supabase.from('notes').select('*', { count: 'exact', head: true }).eq('user_id', user.id),
+        supabase.from('cards').select('*', { count: 'exact', head: true }).eq('user_id', user.id).eq('is_archived', false),
+        supabase.from('cards')
+          .select('id')
+          .eq('user_id', user.id)
+          .eq('is_archived', false)
+          .lte('next_review_at', new Date().toISOString()),
+      ])
+
+      setStats({
+        noteCount: noteCount ?? 0,
+        cardCount: cardCount ?? 0,
+        reviewCount: reviewCards?.length ?? 0,
+      })
+      setLoading(false)
+    }
+    checkAuth()
+  }, [router])
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-gray-400">加载中...</div>
+      </div>
+    )
   }
-
-  // 获取统计数据
-  const [{ count: noteCount }, { count: cardCount }, { data: reviewCards }] = await Promise.all([
-    supabase.from('notes').select('*', { count: 'exact', head: true }).eq('user_id', user.id),
-    supabase.from('cards').select('*', { count: 'exact', head: true }).eq('user_id', user.id).eq('is_archived', false),
-    supabase.from('cards')
-      .select('id')
-      .eq('user_id', user.id)
-      .eq('is_archived', false)
-      .lte('next_review_at', new Date().toISOString()),
-  ])
-
-  const reviewCount = reviewCards?.length ?? 0
 
   return (
     <div className="page-container">
@@ -46,7 +73,7 @@ export default async function HomePage() {
           <div className="flex-1 min-w-0">
             <h2 className="text-md font-medium text-gray-700">记录</h2>
             <p className="text-sm text-gray-400 mt-0.5">文字与图片，随时记录想法</p>
-            <p className="text-xs text-gray-400 mt-2">共 <span className="text-gray-700 font-medium">{noteCount ?? 0}</span> 条记录</p>
+            <p className="text-xs text-gray-400 mt-2">共 <span className="text-gray-700 font-medium">{stats.noteCount}</span> 条记录</p>
           </div>
           <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" className="text-gray-400 mt-0.5 flex-shrink-0">
             <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
@@ -66,14 +93,14 @@ export default async function HomePage() {
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2">
               <h2 className="text-md font-medium text-gray-700">学习记忆</h2>
-              {reviewCount > 0 && (
+              {stats.reviewCount > 0 && (
                 <span className="text-xs bg-red-50 text-red-600 px-1.5 py-0.5 rounded-full font-medium">
-                  {reviewCount} 待复习
+                  {stats.reviewCount} 待复习
                 </span>
               )}
             </div>
             <p className="text-sm text-gray-400 mt-0.5">遗忘曲线，科学复习</p>
-            <p className="text-xs text-gray-400 mt-2">共 <span className="text-gray-700 font-medium">{cardCount ?? 0}</span> 张卡片</p>
+            <p className="text-xs text-gray-400 mt-2">共 <span className="text-gray-700 font-medium">{stats.cardCount}</span> 张卡片</p>
           </div>
           <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" className="text-gray-400 mt-0.5 flex-shrink-0">
             <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
@@ -82,13 +109,13 @@ export default async function HomePage() {
       </div>
 
       {/* 待复习提示 */}
-      {reviewCount > 0 && (
+      {stats.reviewCount > 0 && (
         <div className="mt-4 bg-red-50 border border-red-200 rounded-xl px-4 py-3 flex items-center gap-3">
           <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#DC2626" strokeWidth="2">
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
           <p className="text-sm text-red-600 flex-1">
-            有 <strong>{reviewCount}</strong> 张卡片需要复习
+            有 <strong>{stats.reviewCount}</strong> 张卡片需要复习
           </p>
           <Link href="/cards" className="text-xs text-red-600 font-medium hover:underline">
             去复习 →
