@@ -35,7 +35,8 @@ export default function RegisterPage() {
       options: { emailRedirectTo: typeof window !== 'undefined' ? `${window.location.origin}/` : '/' },
     })
     if (error) {
-      setError(error.message === 'User already registered' ? '该邮箱已注册' : '注册失败，请重试')
+      console.error('注册错误:', error)
+      setError(error.message === 'User already registered' ? '该邮箱已注册' : `注册失败: ${error.message}`)
     } else {
       setDone(true)
     }
