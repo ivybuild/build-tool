@@ -35,13 +35,14 @@ export default function CardsClient({ initialCards, userId }: CardsClientProps) 
   async function handleStudied(card: Card) {
     const newCount = card.study_count + 1
     const nextReview = calcNextReviewAt(newCount)
+    // @ts-ignore - Supabase 类型推断问题
     const { data, error } = await supabase
       .from('cards')
       .update({
         study_count: newCount,
         next_review_at: nextReview.toISOString(),
         last_studied_at: new Date().toISOString(),
-      } as any)
+      })
       .eq('id', card.id)
       .select()
       .single()
@@ -59,6 +60,7 @@ export default function CardsClient({ initialCards, userId }: CardsClientProps) 
   async function handleArchive() {
     if (!archiveTarget) return
     setArchiving(true)
+    // @ts-ignore - Supabase 类型推断问题
     const { error } = await supabase
       .from('cards')
       .update({ is_archived: true })
