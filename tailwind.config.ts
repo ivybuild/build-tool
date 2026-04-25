@@ -32,20 +32,6 @@ const config: Config = {
           border: '#FECACA',
           text: '#DC2626',
         },
-        surface: {
-          DEFAULT: '#FAFAFA',
-          card: '#FFFFFF',
-          muted: '#F3F4F6',
-        },
-        ink: {
-          DEFAULT: '#374151',
-          secondary: '#6B7280',
-          muted: '#9CA3AF',
-        },
-        border: {
-          DEFAULT: '#E5E7EB',
-          light: '#F3F4F6',
-        },
       },
       fontSize: {
         'xs': ['12px', { lineHeight: '1.5' }],

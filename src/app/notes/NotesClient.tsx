@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useCallback } from 'react'
+import { useState, useRef } from 'react'
 import { Note } from '@/types'
 import { createClient } from '@/lib/supabase/client'
 import { extractTags, formatDateTime, formatRelativeTime } from '@/lib/utils'
@@ -124,7 +124,7 @@ export default function NotesClient({ initialNotes, userId }: NotesClientProps) 
     return parts.map((part, i) => {
       if (part.startsWith('#')) {
         return (
-          <span key={i} className="text-primary font-medium cursor-pointer hover:underline"
+          <span key={i} className="text-blue-600 font-medium cursor-pointer hover:underline"
             onClick={() => setFilterTag(part.slice(1))}>
             {part}
           </span>
@@ -138,7 +138,7 @@ export default function NotesClient({ initialNotes, userId }: NotesClientProps) 
     <div className="page-container">
       {/* 头部 */}
       <div className="flex items-center justify-between mb-5">
-        <h1 className="text-xl font-medium text-ink">记录</h1>
+        <h1 className="text-xl font-medium text-gray-700">记录</h1>
         {!showEditor && (
           <Button size="sm" onClick={openNew}>
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
@@ -184,7 +184,7 @@ export default function NotesClient({ initialNotes, userId }: NotesClientProps) 
           {uploadedImages.length > 0 && (
             <div className="flex gap-2 flex-wrap mb-3">
               {uploadedImages.map((url, i) => (
-                <div key={i} className="relative group w-16 h-16 rounded-lg overflow-hidden border border-default">
+                <div key={i} className="relative group w-16 h-16 rounded-lg overflow-hidden border border-gray-200">
                   <Image src={url} alt="" fill className="object-cover" />
                   <button
                     onClick={() => setUploadedImages(prev => prev.filter((_, idx) => idx !== i))}
@@ -200,7 +200,7 @@ export default function NotesClient({ initialNotes, userId }: NotesClientProps) 
             <button
               onClick={() => fileInputRef.current?.click()}
               disabled={uploading}
-              className="flex items-center gap-1 text-sm text-ink-secondary hover:text-ink transition-colors px-2 py-1.5 rounded-lg hover:bg-surface-muted"
+              className="flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 transition-colors px-2 py-1.5 rounded-lg hover:bg-gray-100"
             >
               <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -274,7 +274,7 @@ function NoteCard({
   return (
     <div className="card-base p-4 group">
       {/* 内容 */}
-      <p className="text-base text-ink whitespace-pre-wrap break-words leading-relaxed">
+      <p className="text-base text-gray-700 whitespace-pre-wrap break-words leading-relaxed">
         {renderContent(note.content)}
       </p>
 
@@ -283,7 +283,7 @@ function NoteCard({
         <div className="flex gap-2 flex-wrap mt-3">
           {note.images.map((url, i) => (
             <a key={i} href={url} target="_blank" rel="noopener noreferrer"
-               className="block w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border border-default hover:opacity-90 transition-opacity relative">
+               className="block w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border border-gray-200 hover:opacity-90 transition-opacity relative">
               <Image src={url} alt="" fill className="object-cover" />
             </a>
           ))}
@@ -291,11 +291,11 @@ function NoteCard({
       )}
 
       {/* 底部元信息 */}
-      <div className="flex items-center justify-between mt-3 pt-3 border-t border-light">
-        <div className="flex items-center gap-3 text-xs text-ink-muted">
+      <div className="flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
+        <div className="flex items-center gap-3 text-xs text-gray-400">
           <span title="创建时间">创建 {formatDateTime(note.created_at)}</span>
           {note.updated_at !== note.created_at && (
-            <span title="修改时间" className="text-ink-muted/70">
+            <span title="修改时间" className="text-gray-400/70">
               · 修改 {formatRelativeTime(note.updated_at)}
             </span>
           )}
@@ -303,7 +303,7 @@ function NoteCard({
         <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
           <button
             onClick={onEdit}
-            className="p-1.5 text-ink-muted hover:text-ink hover:bg-surface-muted rounded-md transition-colors"
+            className="p-1.5 text-gray-400 hover:text-gray-700 hover:bg-gray-100 rounded-md transition-colors"
             title="编辑"
           >
             <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -312,7 +312,7 @@ function NoteCard({
           </button>
           <button
             onClick={onDelete}
-            className="p-1.5 text-ink-muted hover:text-red-500 hover:bg-red-50 rounded-md transition-colors"
+            className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-md transition-colors"
             title="删除"
           >
             <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">

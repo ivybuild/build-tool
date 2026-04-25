@@ -75,13 +75,13 @@ export default function CardsClient({ initialCards, userId }: CardsClientProps) 
       {/* 头部 */}
       <div className="flex items-center justify-between mb-5">
         <div>
-          <h1 className="text-xl font-medium text-ink">学习记忆</h1>
+          <h1 className="text-xl font-medium text-gray-700">学习记忆</h1>
           {reviewCount > 0 && (
-            <p className="text-sm text-review-text mt-0.5">{reviewCount} 张需要复习</p>
+            <p className="text-sm text-red-600 mt-0.5">{reviewCount} 张需要复习</p>
           )}
         </div>
         <div className="flex items-center gap-2">
-          <Link href="/cards/archived" className="text-sm text-ink-muted hover:text-ink transition-colors px-2 py-1.5 rounded-lg hover:bg-surface-muted flex items-center gap-1">
+          <Link href="/cards/archived" className="text-sm text-gray-400 hover:text-gray-700 transition-colors px-2 py-1.5 rounded-lg hover:bg-gray-100 flex items-center gap-1">
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
             </svg>
@@ -162,8 +162,8 @@ function StudyCard({
     <div className={cn(
       'rounded-xl border transition-shadow',
       isReview
-        ? 'bg-review-bg border-review-border shadow-sm'
-        : 'bg-white border-default shadow-card hover:shadow-card-hover'
+        ? 'bg-red-50 border-red-200 shadow-sm'
+        : 'bg-white border-gray-200 shadow-card hover:shadow-card-hover'
     )}>
       {/* 卡片头部（点击展开） */}
       <button
@@ -173,23 +173,23 @@ function StudyCard({
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
             {isReview && (
-              <span className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-review-text" />
+              <span className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-red-600" />
             )}
-            <span className="text-md font-medium text-ink truncate">{card.title}</span>
+            <span className="text-md font-medium text-gray-700 truncate">{card.title}</span>
           </div>
           <div className="flex items-center gap-2 mt-0.5">
-            <span className={cn('text-xs', isReview ? 'text-review-text font-medium' : 'text-ink-muted')}>
+            <span className={cn('text-xs', isReview ? 'text-red-600 font-medium' : 'text-gray-400')}>
               {reviewDesc}
             </span>
             {card.study_count > 0 && (
-              <span className="text-xs text-ink-muted">· 已学 {card.study_count} 次</span>
+              <span className="text-xs text-gray-400">· 已学 {card.study_count} 次</span>
             )}
           </div>
         </div>
         <svg
           width="15" height="15" fill="none" viewBox="0 0 24 24"
           stroke="currentColor" strokeWidth="2"
-          className={cn('text-ink-muted flex-shrink-0 transition-transform duration-200', expanded && 'rotate-180')}
+          className={cn('text-gray-400 flex-shrink-0 transition-transform duration-200', expanded && 'rotate-180')}
         >
           <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
         </svg>
@@ -197,7 +197,7 @@ function StudyCard({
 
       {/* 展开内容 */}
       {expanded && (
-        <div className="animate-fade-in border-t border-default/60">
+        <div className="animate-fade-in border-t border-gray-200/60">
           {/* 卡片内容 */}
           <div className="px-4 py-3">
             <CardContent content={card.content} />
@@ -206,16 +206,17 @@ function StudyCard({
           {/* 操作按钮 */}
           <div className="px-4 pb-3 flex items-center gap-2 justify-between">
             <Link href={`/cards/${card.id}/edit`}>
-              <button className="text-xs text-ink-muted hover:text-ink transition-colors px-2 py-1 rounded hover:bg-surface-muted">
+              <button className="text-xs text-gray-400 hover:text-gray-700 transition-colors px-2 py-1 rounded hover:bg-gray-100">
                 编辑
               </button>
             </Link>
+
             <div className="flex gap-2">
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={onArchive}
-                className="text-ink-muted text-xs"
+                className="text-gray-400 text-xs"
               >
                 不再学习
               </Button>
@@ -249,12 +250,12 @@ function CardContent({ content }: { content: Card['content'] }) {
   }
 
   if (!content?.segments?.length) {
-    return <p className="text-sm text-ink-muted">（无内容）</p>
+    return <p className="text-sm text-gray-400">（无内容）</p>
   }
 
   let blankIndex = 0
   return (
-    <p className="text-base text-ink leading-relaxed whitespace-pre-wrap break-words">
+    <p className="text-base text-gray-700 leading-relaxed whitespace-pre-wrap break-words">
       {content.segments.map((seg, i) => {
         if (seg.type === 'text') {
           return <span key={i}>{seg.content}</span>

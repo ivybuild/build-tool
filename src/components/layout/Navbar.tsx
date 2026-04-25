@@ -49,7 +49,7 @@ export default function Navbar() {
   return (
     <>
       {/* 顶部导航（桌面） */}
-      <header className="hidden sm:flex sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-default">
+      <header className="hidden sm:flex sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-gray-200">
         <nav className="max-w-2xl mx-auto w-full px-4 h-12 flex items-center justify-between">
           <div className="flex items-center gap-1">
             {NAV_ITEMS.map(item => (
@@ -60,7 +60,7 @@ export default function Navbar() {
                   'flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm transition-colors',
                   pathname === item.href
                     ? 'bg-blue-50 text-blue-600 font-medium'
-                    : 'text-ink-secondary hover:text-ink hover:bg-surface-muted'
+                    : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'
                 )}
               >
                 {item.icon}
@@ -70,7 +70,7 @@ export default function Navbar() {
           </div>
           <button
             onClick={handleSignOut}
-            className="text-xs text-ink-muted hover:text-ink transition-colors px-2 py-1 rounded-md hover:bg-surface-muted"
+            className="text-xs text-gray-400 hover:text-gray-700 transition-colors px-2 py-1 rounded-md hover:bg-gray-100"
           >
             退出
           </button>
@@ -78,7 +78,7 @@ export default function Navbar() {
       </header>
 
       {/* 底部导航（移动端） */}
-      <nav className="sm:hidden fixed bottom-0 inset-x-0 z-40 bg-white/90 backdrop-blur-md border-t border-default safe-area-inset-bottom">
+      <nav className="sm:hidden fixed bottom-0 inset-x-0 z-40 bg-white/90 backdrop-blur-md border-t border-gray-200 safe-area-inset-bottom">
         <div className="flex">
           {NAV_ITEMS.map(item => (
             <Link
@@ -87,8 +87,8 @@ export default function Navbar() {
               className={cn(
                 'flex-1 flex flex-col items-center gap-0.5 py-2.5 text-xs transition-colors',
                 pathname === item.href
-                  ? 'text-primary'
-                  : 'text-ink-muted hover:text-ink'
+                  ? 'text-blue-600'
+                  : 'text-gray-400 hover:text-gray-700'
               )}
             >
               {item.icon}

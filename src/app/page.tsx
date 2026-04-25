@@ -27,8 +27,8 @@ export default async function HomePage() {
     <div className="page-container">
       {/* 问候语 */}
       <div className="mb-8">
-        <h1 className="text-xl font-medium text-ink">你好 👋</h1>
-        <p className="text-sm text-ink-muted mt-1">今天也是学习的一天</p>
+        <h1 className="text-xl font-medium text-gray-700">你好 👋</h1>
+        <p className="text-sm text-gray-400 mt-1">今天也是学习的一天</p>
       </div>
 
       {/* 功能入口 */}
@@ -44,11 +44,11 @@ export default async function HomePage() {
             </svg>
           </div>
           <div className="flex-1 min-w-0">
-            <h2 className="text-md font-medium text-ink">记录</h2>
-            <p className="text-sm text-ink-muted mt-0.5">文字与图片，随时记录想法</p>
-            <p className="text-xs text-ink-muted mt-2">共 <span className="text-ink font-medium">{noteCount ?? 0}</span> 条记录</p>
+            <h2 className="text-md font-medium text-gray-700">记录</h2>
+            <p className="text-sm text-gray-400 mt-0.5">文字与图片，随时记录想法</p>
+            <p className="text-xs text-gray-400 mt-2">共 <span className="text-gray-700 font-medium">{noteCount ?? 0}</span> 条记录</p>
           </div>
-          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" className="text-ink-muted mt-0.5 flex-shrink-0">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" className="text-gray-400 mt-0.5 flex-shrink-0">
             <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
           </svg>
         </Link>
@@ -65,17 +65,17 @@ export default async function HomePage() {
           </div>
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2">
-              <h2 className="text-md font-medium text-ink">学习记忆</h2>
+              <h2 className="text-md font-medium text-gray-700">学习记忆</h2>
               {reviewCount > 0 && (
-                <span className="text-xs bg-review-bg text-review-text px-1.5 py-0.5 rounded-full font-medium">
+                <span className="text-xs bg-red-50 text-red-600 px-1.5 py-0.5 rounded-full font-medium">
                   {reviewCount} 待复习
                 </span>
               )}
             </div>
-            <p className="text-sm text-ink-muted mt-0.5">遗忘曲线，科学复习</p>
-            <p className="text-xs text-ink-muted mt-2">共 <span className="text-ink font-medium">{cardCount ?? 0}</span> 张卡片</p>
+            <p className="text-sm text-gray-400 mt-0.5">遗忘曲线，科学复习</p>
+            <p className="text-xs text-gray-400 mt-2">共 <span className="text-gray-700 font-medium">{cardCount ?? 0}</span> 张卡片</p>
           </div>
-          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" className="text-ink-muted mt-0.5 flex-shrink-0">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" className="text-gray-400 mt-0.5 flex-shrink-0">
             <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
           </svg>
         </Link>
@@ -83,14 +83,14 @@ export default async function HomePage() {
 
       {/* 待复习提示 */}
       {reviewCount > 0 && (
-        <div className="mt-4 bg-review-bg border border-review-border rounded-xl px-4 py-3 flex items-center gap-3">
+        <div className="mt-4 bg-red-50 border border-red-200 rounded-xl px-4 py-3 flex items-center gap-3">
           <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#DC2626" strokeWidth="2">
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          <p className="text-sm text-review-text flex-1">
+          <p className="text-sm text-red-600 flex-1">
             有 <strong>{reviewCount}</strong> 张卡片需要复习
           </p>
-          <Link href="/cards" className="text-xs text-review-text font-medium hover:underline">
+          <Link href="/cards" className="text-xs text-red-600 font-medium hover:underline">
             去复习 →
           </Link>
         </div>

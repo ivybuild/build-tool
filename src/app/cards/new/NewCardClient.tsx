@@ -147,13 +147,13 @@ export default function NewCardClient({ userId, initialTitle = '', initialSegmen
       <div className="flex items-center gap-3 mb-6">
         <button
           onClick={() => router.back()}
-          className="text-ink-muted hover:text-ink transition-colors p-1 rounded-lg hover:bg-surface-muted"
+          className="text-gray-400 hover:text-gray-700 transition-colors p-1 rounded-lg hover:bg-gray-100"
         >
           <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
             <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
           </svg>
         </button>
-        <h1 className="text-xl font-medium text-ink">{cardId ? '编辑卡片' : '新建卡片'}</h1>
+        <h1 className="text-xl font-medium text-gray-700">{cardId ? '编辑卡片' : '新建卡片'}</h1>
       </div>
 
       <div className="card-base p-5 flex flex-col gap-4">
@@ -167,14 +167,14 @@ export default function NewCardClient({ userId, initialTitle = '', initialSegmen
 
         <div className="flex flex-col gap-1">
           <div className="flex items-center justify-between">
-            <label className="text-sm text-ink-secondary font-medium">内容</label>
+            <label className="text-sm text-gray-500 font-medium">内容</label>
             <div className="flex items-center gap-2">
-              <span className="text-xs text-ink-muted">
-                用 <code className="bg-surface-muted px-1 py-0.5 rounded text-primary">{'{{填空}}'}</code> 标记填空
+              <span className="text-xs text-gray-400">
+                用 <code className="bg-gray-100 px-1 py-0.5 rounded text-blue-600">{'{{填空}}'}</code> 标记填空
               </span>
               <button
                 onClick={() => fileInputRef.current?.click()}
-                className="text-xs text-ink-muted hover:text-primary transition-colors"
+                className="text-xs text-gray-400 hover:text-blue-600 transition-colors"
               >
                 导入文件
               </button>
@@ -188,7 +188,7 @@ export default function NewCardClient({ userId, initialTitle = '', initialSegmen
             </div>
           </div>
           <textarea
-            className="w-full px-3 py-2 text-base text-ink bg-white border border-default rounded-lg placeholder:text-ink-muted focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-150 resize-none"
+            className="w-full px-3 py-2 text-base text-gray-700 bg-white border border-gray-200 rounded-lg placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 transition-colors duration-150 resize-none"
             placeholder={"输入卡片内容，用 {{填空内容}} 标记需要填空的部分\n\n示例：\n光合作用的产物是 {{葡萄糖}} 和 {{氧气}}。"}
             rows={8}
             value={rawText}
@@ -200,7 +200,7 @@ export default function NewCardClient({ userId, initialTitle = '', initialSegmen
         {rawText && (
           <div>
             <button
-              className="text-xs text-ink-muted hover:text-ink transition-colors flex items-center gap-1 mb-2"
+              className="text-xs text-gray-400 hover:text-gray-700 transition-colors flex items-center gap-1 mb-2"
               onClick={() => setShowPreview(v => !v)}
             >
               <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"
@@ -210,16 +210,17 @@ export default function NewCardClient({ userId, initialTitle = '', initialSegmen
               {showPreview ? '收起预览' : '展开预览'}
             </button>
             {showPreview && (
-              <div className="bg-surface-muted rounded-lg px-3 py-3 animate-fade-in">
-                <p className="text-xs text-ink-muted mb-2">预览效果（点击填空查看答案）</p>
+              <div className="bg-gray-100 rounded-lg px-3 py-3 animate-fade-in">
+                <p className="text-xs text-gray-400 mb-2">预览效果（点击填空查看答案）</p>
                 <PreviewContent segments={preview} />
               </div>
+
             )}
           </div>
         )}
 
         {/* 导入说明 */}
-        <div className="text-xs text-ink-muted bg-surface-muted rounded-lg px-3 py-2">
+        <div className="text-xs text-gray-400 bg-gray-100 rounded-lg px-3 py-2">
           <p className="font-medium mb-1">导入文件说明</p>
           <p>支持 .txt 和 .md 文件。文件第一行作为标题，<code>==高亮==</code> 或 <code>**加粗**</code> 的内容自动识别为填空。</p>
         </div>
@@ -251,7 +252,7 @@ function PreviewContent({ segments }: { segments: CardSegment[] }) {
 
   let blankIndex = 0
   return (
-    <p className="text-base text-ink leading-relaxed whitespace-pre-wrap break-words">
+    <p className="text-base text-gray-700 leading-relaxed whitespace-pre-wrap break-words">
       {segments.map((seg, i) => {
         if (seg.type === 'text') return <span key={i}>{seg.content}</span>
         const idx = blankIndex++

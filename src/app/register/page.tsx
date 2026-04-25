@@ -44,16 +44,16 @@ export default function RegisterPage() {
 
   if (done) {
     return (
-      <div className="min-h-screen flex items-center justify-center px-4 bg-surface">
+      <div className="min-h-screen flex items-center justify-center px-4 bg-gray-100">
         <div className="w-full max-w-sm text-center card-base p-8">
           <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-green-50 mb-4">
             <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#10B981" strokeWidth="2">
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h2 className="text-lg font-medium text-ink mb-2">验证邮件已发送</h2>
-          <p className="text-sm text-ink-secondary">请查收邮件，点击链接完成注册后即可登录</p>
-          <Link href="/login" className="block mt-5 text-sm text-primary hover:underline">
+          <h2 className="text-lg font-medium text-gray-700 mb-2">验证邮件已发送</h2>
+          <p className="text-sm text-gray-500">请查收邮件，点击链接完成注册后即可登录</p>
+          <Link href="/login" className="block mt-5 text-sm text-blue-600 hover:underline">
             返回登录
           </Link>
         </div>
@@ -62,16 +62,16 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 bg-surface">
+    <div className="min-h-screen flex items-center justify-center px-4 bg-gray-100">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-primary/10 mb-3">
+          <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-blue-50 mb-3">
             <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#2563EB" strokeWidth="1.8">
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
             </svg>
           </div>
-          <h1 className="text-xl font-medium text-ink">创建账号</h1>
-          <p className="text-sm text-ink-muted mt-1">开始你的学习之旅</p>
+          <h1 className="text-xl font-medium text-gray-700">创建账号</h1>
+          <p className="text-sm text-gray-400 mt-1">开始你的学习之旅</p>
         </div>
 
         <form onSubmit={handleRegister} className="card-base p-6 flex flex-col gap-4">
@@ -107,9 +107,9 @@ export default function RegisterPage() {
           </Button>
         </form>
 
-        <p className="text-center text-sm text-ink-muted mt-4">
+        <p className="text-center text-sm text-gray-400 mt-4">
           已有账号？{' '}
-          <Link href="/login" className="text-primary hover:underline">
+          <Link href="/login" className="text-blue-600 hover:underline">
             登录
           </Link>
         </p>

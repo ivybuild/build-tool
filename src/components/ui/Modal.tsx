@@ -41,11 +41,11 @@ export default function Modal({ open, onClose, title, children, className }: Mod
         onClick={e => e.stopPropagation()}
       >
         {title && (
-          <div className="flex items-center justify-between px-5 py-4 border-b border-default">
-            <h3 className="text-lg font-medium text-ink">{title}</h3>
+          <div className="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+            <h3 className="text-lg font-medium text-gray-700">{title}</h3>
             <button
               onClick={onClose}
-              className="text-ink-muted hover:text-ink transition-colors p-1 rounded-md hover:bg-surface-muted"
+              className="text-gray-400 hover:text-gray-700 transition-colors p-1 rounded-md hover:bg-gray-100"
             >
               <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -76,7 +76,7 @@ export function ConfirmModal({
 }: ConfirmModalProps) {
   return (
     <Modal open={open} onClose={onClose} title={title}>
-      <p className="text-base text-ink-secondary mb-5">{message}</p>
+      <p className="text-base text-gray-500 mb-5">{message}</p>
       <div className="flex gap-2 justify-end">
         <Button variant="ghost" size="sm" onClick={onClose}>取消</Button>
         <Button variant={confirmVariant} size="sm" onClick={onConfirm} loading={loading}>
