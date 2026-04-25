@@ -32,7 +32,7 @@ export default function RegisterPage() {
     const { error } = await supabase.auth.signUp({
       email,
       password,
-      options: { emailRedirectTo: typeof window !== 'undefined' ? `${window.location.origin}/` : '/' },
+      options: { emailRedirectTo: 'https://build-tool-gilt.vercel.app/' },
     })
     if (error) {
       console.error('注册错误:', error)
