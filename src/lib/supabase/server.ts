@@ -15,11 +15,12 @@ export async function createClient() {
         },
         setAll(cookiesToSet: { name: string; value: string; options: Record<string, unknown> }[]) {
           try {
-            cookiesToSet.forEach(({ name, value, options }) =>
+            cookiesToSet.forEach(({ name, value, options }) => {
               cookieStore.set(name, value, options)
-            )
-          } catch {
-            // Server Component 中忽略 set cookie 错误
+            })
+          } catch (err) {
+            // Server Component 中无法设置 cookie 时会抛出错误，这是预期的行为
+            console.error('Server cookie set error:', err)
           }
         },
       },

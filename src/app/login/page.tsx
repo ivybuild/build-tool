@@ -19,10 +19,12 @@ export default function LoginPage() {
     e.preventDefault()
     setError('')
     setLoading(true)
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password })
     if (error) {
       setError('邮箱或密码错误，请重试')
-    } else {
+    } else if (data.session) {
+      // 确保 session 已设置后再跳转
+      await supabase.auth.setSession(data.session)
       router.push('/')
       router.refresh()
     }
